@@ -1,0 +1,51 @@
+group 'com.jhomlala.catcher'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 34
+    namespace 'com.jhomlala.catcher'
+
+    kotlinOptions {
+        jvmTarget = "17"  // Set Kotlin target JVM version to 17
+    }
+
+    // Add this section to align Java compatibility
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17  // Set Java source compatibility to 17
+        targetCompatibility = JavaVersion.VERSION_17  // Set Java target compatibility to 17
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    defaultConfig {
+        minSdkVersion 22
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
